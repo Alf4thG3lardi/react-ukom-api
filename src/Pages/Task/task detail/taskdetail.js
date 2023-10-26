@@ -29,7 +29,7 @@ const Taskdetail = () => {
               <h3>Detail</h3>
               <hr class='border-white'/>
               <ul class='list-group list-group-flush w-75'>
-                <li class='list-group-item bg-dark text-white'>assigned_to : {task.assigned_to}</li>
+                <li class='list-group-item bg-dark text-white'>assigned_to : </li>
                 <li class='list-group-item bg-dark text-white'>priority : {task.priority}</li>
                 <li class='list-group-item bg-dark text-white'>Deadline : {task.deadline}</li>
                 <li class='list-group-item bg-dark text-white'>
@@ -85,7 +85,7 @@ const Taskdetail = () => {
                         (comment) => (
                             <div class='card text-bg-dark mb-2'>
                                 <div class='card-body'>
-                                    <h6 class='card-title fw-bolder'>{getClient(comment.id), client.username}</h6>
+                                    <h6 class='card-title fw-bolder'>{getClient(comment.client_id),client.username}</h6>
                                     <p class='card-text'>{comment.comment}</p>
                                 </div>
                             </div>
