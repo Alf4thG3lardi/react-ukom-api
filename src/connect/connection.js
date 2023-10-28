@@ -1,7 +1,7 @@
 import {createContext, useState} from 'react';
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
+axios.defaults.baseURL = "http://127.0.0.1:8000/api/v1/";
 const Connection = createContext();
 
 const clientForm = {
@@ -84,7 +84,15 @@ export const ConnectionProvider  = ({children}) => {
         setClientValue(clientForm);
     }
 
+    const updateClient = async(id) => {
+        e.preventDefault();
+        await axios.put("client/"+id, clientValue)
+        setClientValue(clientForm);
+    } 
 
+    const deleteClient = async(id) => {
+        await axios.delete('client/'+id)
+    }
     // Project section
 
     const [projectValue, setProjectValue] = useState(projectForm)
@@ -121,6 +129,17 @@ export const ConnectionProvider  = ({children}) => {
         await axios.post("project", projectValue)
         setProjectValue(projectForm);
     }
+
+    const updateProject = async(id) => {
+        e.preventDefault();
+        await axios.put("project/"+id, projectValue)
+        setProjectValue(projectForm);
+    } 
+
+    const deleteProject = async(id) => {
+        await axios.delete('project/'+id)
+    }
+
     //Task Section
 
     const [taskValue, setTaskValue] = useState(taskForm)
@@ -159,6 +178,15 @@ export const ConnectionProvider  = ({children}) => {
         setTaskValue(taskForm);
     }
 
+    const updateTask = async(id) => {
+        e.preventDefault();
+        await axios.put("task/"+id, taskValue)
+        setTaskValue(taskForm);
+    } 
+
+    const deleteTask = async(id) => {
+        await axios.delete('task/'+id)
+    }
     //Attachment Section
 
     const [attachmentValue, setAttachmentValue] = useState(attachmentForm)
@@ -179,6 +207,16 @@ export const ConnectionProvider  = ({children}) => {
         e.preventDefault();
         await axios.post("attachment", attachmentValue)
         setAttachmentValue(attachmentForm);
+    }
+
+    const updateAttachment = async(id) => {
+        e.preventDefault();
+        await axios.put("attachment/"+id, attachmentValue)
+        setAttachmentValue(attachmentForm);
+    } 
+
+    const deleteAttachment = async(id) => {
+        await axios.delete('attachment/'+id)
     }
     //Comment Section
 
@@ -202,12 +240,22 @@ export const ConnectionProvider  = ({children}) => {
         setCommentValue(commentForm);
     }
 
+    const updateComment = async(id) => {
+        e.preventDefault();
+        await axios.put("comment/"+id, commentValue)
+        setCommentValue(commentForm);
+    } 
+
+    const deleteComment = async(id) => {
+        await axios.delete('comment/'+id)
+    }
+
     return <Connection.Provider value={{
-        getClients, clients, setClients, clientForm, clientValue, setClientValue, getClient, client, setClient, storeClient, setClientForm, 
-        getProjects, projects, setProjects, projectForm, projectValue, setProjectValue, getProject, project, setProject, storeProject, setProjectForm,
-        getTasks, tasks, setTasks, taskForm, taskValue, setTaskValue, getTask, task, setTask, storeTask, setTaskForm,
-        getAttachments, attachments, setAttachments, attachmentForm, attachmentValue, setAttachmentValue, setAttachmentForm, storeAttachment,
-        getComments, comments, setComments, commentForm, commentValue, setCommentValue, setCommentForm, storeComment
+        getClients, clients, setClients, clientForm, clientValue, setClientValue, getClient, client, setClient, storeClient, setClientForm, updateClient, deleteClient,
+        getProjects, projects, setProjects, projectForm, projectValue, setProjectValue, getProject, project, setProject, storeProject, setProjectForm, updateProject, deleteProject,
+        getTasks, tasks, setTasks, taskForm, taskValue, setTaskValue, getTask, task, setTask, storeTask, setTaskForm, updateTask, deleteTask, 
+        getAttachments, attachments, setAttachments, attachmentForm, attachmentValue, setAttachmentValue, setAttachmentForm, storeAttachment, updateAttachment, deleteAttachment,
+        getComments, comments, setComments, commentForm, commentValue, setCommentValue, setCommentForm, storeComment, updateComment, deleteComment,
     }}>
         {children}
     </Connection.Provider>
